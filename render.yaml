@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: weatherwise-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: serve -s build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://weatherwise-backend-xamg.onrender.com
+    healthCheckPath: /
