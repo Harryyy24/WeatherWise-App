@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: weatherwise-backend
+    env: java
+    build:
+      dockerfile: Dockerfile
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: weatherwise-db
+          property: connectionString
+    plan: free
+    numInstances: 1
+    healthCheckPath: /actuator/health
+    autoDeploy: true
+
+databases:
+  - name: weatherwise-db
+    databaseName: weatherwise
+    user: weatherwise_user
+    plan: free
